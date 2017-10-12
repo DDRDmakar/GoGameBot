@@ -1,0 +1,25 @@
+apply plugin: "java"
+
+sourceSets {
+	main.java.srcDir "src/main/application"
+	main.java.srcDir "src/main/backend"
+}
+
+jar {
+	manifest.attributes "Main-Class": "backend.Main"
+}
+
+
+buildscript {
+	repositories {
+		flatDir dirs: "build/libs"
+	}
+	dependencies {
+		
+		// Before building this project please build javafx-gradle-plugin from source
+		// and put it into build/libs directory.
+		classpath "org.bitbucket.shemnon.javafxplugin:javafx-gradle-plugin-8.8.0"
+		
+		classpath files("${System.properties['java.home']}/../lib/ant-javafx.jar")
+	}
+}

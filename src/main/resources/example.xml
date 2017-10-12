@@ -1,0 +1,36 @@
+
+<GridPane fx:controller="fxmlexample.FXMLExampleController" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+	<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+	
+</GridPane>
+
+
+
+<children>
+		<Button fx:id="clearImage" layoutX="20" layoutY="580" onAction="#clearAllPixels" text="Clear" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
+		<Canvas fx:id="pic" height="435.0" layoutX="20.0" layoutY="74.0" pickOnBounds="true" width="548.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
+		</Canvas>
+		<Slider fx:id="slider_B" blockIncrement="0.01" layoutX="402.0" layoutY="570.0" max="1.0" value="1.0" />
+		<Slider fx:id="slider_G" blockIncrement="0.01" layoutX="402.0" layoutY="550.0" max="1.0" value="1.0" />
+		<Slider fx:id="slider_R" blockIncrement="0.01" layoutX="402.0" layoutY="529.0" max="1.0" value="1.0" />
+		<Slider fx:id="slider_size" blockIncrement="0.1" layoutX="79.0" layoutY="570.0" max="50.0" min="0.1" prefHeight="14.0" prefWidth="283.0" value="5.0" />
+		<Label layoutX="377.0" layoutY="524.0" prefHeight="25.0" prefWidth="17.0" text="R" />
+		<Label layoutX="377.0" layoutY="545.0" prefHeight="25.0" prefWidth="17.0" text="G" />
+		<Label layoutX="377.0" layoutY="565.0" prefHeight="25.0" prefWidth="17.0" text="B" />
+		<Label layoutX="108.0" layoutY="538.0" prefHeight="25.0" prefWidth="43.0" text="Size" />
+		<Label fx:id="slider_size_label" layoutX="152.0" layoutY="537.0" prefHeight="25.0" prefWidth="43.0" />
+		<Label fx:id="slider_R_label" layoutX="551.0" layoutY="524.0" prefHeight="25.0" prefWidth="43.0" />
+		<Label fx:id="slider_G_label" layoutX="551.0" layoutY="545.0" prefHeight="25.0" prefWidth="43.0" />
+		<Label fx:id="slider_B_label" layoutX="551.0" layoutY="565.0" prefHeight="25.0" prefWidth="43.0" />
+		<Rectangle fx:id="colorSampleBlue" arcHeight="5.0" arcWidth="5.0" fill="BLUE" height="20.0" layoutX="301.0" layoutY="526.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+		<Rectangle fx:id="colorSampleGreen" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="20.0" layoutX="281.0" layoutY="526.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+		<Rectangle fx:id="colorSampleBlack" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="221.0" layoutY="526.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+		<Rectangle fx:id="colorSampleWhite" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="241.0" layoutY="526.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+		<Rectangle fx:id="colorSampleRed" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="261.0" layoutY="526.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+		<Rectangle fx:id="colorSampleYellow" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="20.0" layoutX="321.0" layoutY="526.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+		<Rectangle fx:id="colorSamplePink" arcHeight="5.0" arcWidth="5.0" fill="#ff0099" height="20.0" layoutX="341.0" layoutY="526.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+	</children>
+	
+	
+	
+	
