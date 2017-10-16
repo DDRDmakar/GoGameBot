@@ -2,6 +2,7 @@
 package backend;
 
 import application.SettingsController;
+import application.MainWindowController;
 import javafx.application.Application;
 
 class Main {
@@ -14,8 +15,8 @@ class Main {
 		settings.showWindow(args);
 		
 		// Старт окна с игрой, передача параметров
-		//MainWindowController mw = new MainWindowController(settings);
-		//mw.showWindow(args);
+		MainWindowController mw = new MainWindowController(settings);
+		mw.showWindow(args);
 		
 		System.out.println("PROGRAM FINISHED");
 	}

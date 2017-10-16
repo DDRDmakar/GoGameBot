@@ -13,7 +13,6 @@ public class SettingsController extends Application {
 	@Override
 	public void start(Stage s) throws Exception {
 		primaryStage = s;
-		System.out.println("1");
 		
 		/*****************************/
 		javafx.scene.Node fl =
@@ -22,7 +21,7 @@ public class SettingsController extends Application {
 			);
 		/*****************************/
 		
-		primaryStage.setTitle("GO");
+		primaryStage.setTitle("Settings");
 		Group root = new Group();
 		root.getChildren().add(fl);
 		primaryStage.setScene(new Scene(root));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,7 +8,7 @@
 
 <AnchorPane prefHeight="287.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SettingsFXMLController">
    <children>
-      <TextField layoutX="38.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="12" fx:id="xSize" />
+      <TextField fx:id="SIZE_X" layoutX="38.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="12" />
       <Label layoutX="47.0" layoutY="28.0" text="Field size:">
          <font>
             <Font size="19.0" />
@@ -15,12 +16,20 @@
       </Label>
       <Label layoutX="47.0" layoutY="63.0" text="X" />
       <Label layoutX="118.0" layoutY="63.0" text="Y" />
-      <TextField fx:id="ySize" layoutX="111.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="12" />
+      <TextField fx:id="SIZE_Y" layoutX="111.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="12" />
       <Label layoutX="189.0" layoutY="28.0" text="Cell size:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <TextField fx:id="cellSize" layoutX="189.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="50" />
+      <TextField fx:id="SIZE_CELL" layoutX="207.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="50" />
+      <Button fx:id="BUTTON_OK" layoutX="424.0" layoutY="235.0" mnemonicParsing="false" text="OK" />
+      <Button fx:id="BUTTON_CANCEL" layoutX="281.0" layoutY="235.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="BUTTON_RESET" layoutX="200.0" layoutY="235.0" mnemonicParsing="false" text="Reset" />
+      <Label layoutX="402.0" layoutY="201.0" prefHeight="18.0" prefWidth="85.0" text="Start game">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
