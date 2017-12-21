@@ -1,23 +1,32 @@
 
 package backend;
 
-import application.SettingsController;
-import application.MainWindowController;
+import application.SettingsWindow;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Group;
 
 class Main {
 	
 	public static void main(String[] args) {
-		System.out.println("PROGRAM STARTED");
 		
 		// Вывожу окно с настройками игры
-		SettingsController settings = new SettingsController();
+		SettingsWindow settings = new SettingsWindow();
 		settings.showWindow(args);
 		
-		// Старт окна с игрой, передача параметров
-		MainWindowController mw = new MainWindowController(settings);
-		mw.showWindow(args);
+		// Создаю объект игры
+		//GoGame game = new GoGame(settings);
 		
+		// Старт окна с игрой, передача параметров
+		/*
+		MainWindowController mw = new MainWindowController();
+		Group root = new Group();
+		Scene scene = new Scene(root,300,300);
+		stage.setScene(scene);
+		stage.show();
+		mw.showWindow(args);
+		*/
 		System.out.println("PROGRAM FINISHED");
 	}
 }

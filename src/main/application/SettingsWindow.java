@@ -6,13 +6,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class SettingsController extends Application {
-	
-	private Stage primaryStage;
-	
+public class SettingsWindow extends Application {
 	@Override
-	public void start(Stage s) throws Exception {
-		primaryStage = s;
+	public void start(Stage stage) throws Exception {
 		
 		/*****************************/
 		javafx.scene.Node fl =
@@ -21,12 +17,12 @@ public class SettingsController extends Application {
 			);
 		/*****************************/
 		
-		primaryStage.setTitle("Settings");
+		stage.setTitle("Settings");
 		Group root = new Group();
 		root.getChildren().add(fl);
-		primaryStage.setScene(new Scene(root));
+		stage.setScene(new Scene(root));
 		
-		primaryStage.show();
+		stage.show();
 	}
 	
 	public void showWindow(String[] args) {

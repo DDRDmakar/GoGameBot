@@ -1,18 +1,23 @@
+
+
 package application;
 
+import javafx.application.Application;
+import backend.GoGame;
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.*;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class MainWindowFXMLController {
+
+public class MainWindowFXMLController implements Initializable {
 
 	// +====================[VARIABLES]====================+
-	
-	// ...
-	
-	// CONSTRUCTOR
-	public void MainWindowFXMLController() {
-		// ...
-	}
 	
 	// +====================[PRIVATE FUNCTIONS]====================+
 	
@@ -26,7 +31,15 @@ public class MainWindowFXMLController {
 	
 	// +====================[PUBLIC FUNCTIONS]====================+
 	
-	public void initialize() {
+	// CONSTRUCTOR
+	/*
+	public void MainWindowFXMLController() {
+		initialize();
+	}
+	*/
+	
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
 		
 		// ...
 		
