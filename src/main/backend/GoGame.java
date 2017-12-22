@@ -8,14 +8,19 @@ public class GoGame {
 // +====================[VARIABLES]====================+
 	
 	// Game field
-	GameField grid;
+	public GameField grid;
 	
 // +====================[PRIVATE FUNCTIONS]====================+
+	
+	
+	
+	
+	
 	
 // +====================[PUBLIC FUNCTIONS]====================+
 	
 	// CONSTRUCTOR
-	public GoGame(SettingsFXMLController settings) {
+	public GoGame() {
 		grid = new GameField();
 	}
 }

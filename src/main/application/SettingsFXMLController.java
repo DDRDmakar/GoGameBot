@@ -1,6 +1,7 @@
 
 package application;
 
+import application.SettingsContainer;
 import application.MainWindow;
 import javafx.application.Application;
 import backend.GoGame;
@@ -12,9 +13,12 @@ import javafx.fxml.FXML;
 import javafx.scene.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class SettingsFXMLController implements Initializable {
@@ -28,9 +32,9 @@ public class SettingsFXMLController implements Initializable {
 	// +====================[PRIVATE FUNCTIONS]====================+
 	
 	private void reset() { // Here put into text area default text.
-		FX_SIZE_X.getText();
-		FX_SIZE_Y.getText();
-		FX_SIZE_CELL.getText();
+		FX_SIZE_X.setText("12");
+		FX_SIZE_Y.setText("12");
+		FX_SIZE_CELL.setText("50");
 	}
 	
 	private void initLables() {
@@ -39,8 +43,32 @@ public class SettingsFXMLController implements Initializable {
 	
 	@FXML
 	void startGame(ActionEvent event) {
-		try { new MainWindow(); }
-		catch (Exception e) { e.printStackTrace(); }
+		
+		boolean somethingWrong = false;
+		
+		try {
+			SettingsContainer.width = Integer.parseInt(FX_SIZE_X.getText());
+			SettingsContainer.height = Integer.parseInt(FX_SIZE_Y.getText());
+			SettingsContainer.cellSize = Integer.parseInt(FX_SIZE_CELL.getText());
+		}
+		catch (Exception e) { somethingWrong = true; }
+		if (
+			somethingWrong ||
+			SettingsContainer.width < 1 || SettingsContainer.width > 100 ||
+			SettingsContainer.height < 1 || SettingsContainer.height > 100 ||
+			SettingsContainer.cellSize < 1 || SettingsContainer.width > 1000
+		) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+			alert.setTitle("Error!");
+			alert.setHeaderText("Incorrect game settings.");
+			alert.setContentText("It looks, like your settings contain incorrect data. Please, correct it and retry.");
+			alert.showAndWait();
+		}
+		else {
+			try { new MainWindow(); }
+			catch (Exception e) { e.printStackTrace(); }
+		}
 	}
 	
 	@FXML
