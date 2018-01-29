@@ -2,8 +2,10 @@
 
 package application;
 
-import javafx.application.Application;
 import backend.GoGame;
+import application.SettingsContainer;
+
+import javafx.application.Application;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,12 +21,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 public class MainWindowFXMLController implements Initializable {
 
 	// +====================[VARIABLES]====================+
 	
-	int i;
 	GridPane gpanel;
 	
 	@FXML AnchorPane mainPane;
@@ -43,30 +47,75 @@ public class MainWindowFXMLController implements Initializable {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		i=0;
+		
+		// Create grid
 		gpanel = new GridPane();
-		Pane root = new Pane();
-		while(i<3){
-			addButton();
+		
+		// Anchor grid to parent node
+		AnchorPane.setTopAnchor(gpanel, 0.0);
+		AnchorPane.setBottomAnchor(gpanel, 0.0);
+		AnchorPane.setLeftAnchor(gpanel, 0.0);
+		AnchorPane.setRightAnchor(gpanel, 0.0);
+		
+		// Place buttons on grid
+		int i = 0;
+		while (i < SettingsContainer.height) {
+			int j = 0;
+			while (j < SettingsContainer.width) {
+				int ButtonID = i*SettingsContainer.width + j;
+				Button currentB = createButton(ButtonID);
+				// Add final button to grid pane
+				gpanel.add(currentB, i, j);
+				// Set graph cell i j the same ID, as button's
+				GoGame.grid.grid.get(i).get(j).setID(ButtonID);
+				// add button to the map (id -> button)
+				GoGame.buttonIDs.put(ButtonID, currentB);
+				++j;
+			}
+			++i;
 		}
+		
+		//mainPane.getStyleClass().add("pane");
+		//gpanel.getStyleClass().addAll("pane","grid");
+		
+		// gpanel.setGridLinesVisible(true);
+		gpanel.setStyle("-fx-background-color: palegreen; -fx-padding: 10; -fx-hgap: 10; -fx-vgap: 10;");
+		gpanel.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		mainPane.getChildren().add(gpanel);
+		
 		
 		initLables();
 		
 		reset();
 	}
 	
-	private void addButton() {
-		i++;
-		final Button temp = new Button("Button " + i);
-		final int numButton= i;
-		temp.setId("" + i);
+	private Button createButton(int id) {
+		final Button temp = new Button();
+		temp.setMaxSize(SettingsContainer.cellSize, SettingsContainer.cellSize);
+		temp.setPrefSize(SettingsContainer.cellSize, SettingsContainer.cellSize);
+		final int numButton = id;
+		temp.setId("" + id);
+		
+		// prints button id to console, when it's pressed
 		temp.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				System.out.println("id(" + temp.getId()  + ") =  " + numButton);
+				// DEBUG
+				System.out.println("Button pressed. id(" + temp.getId()  + ") =  " + numButton);
+				// Set black stone
+				if (GoGame.playerSetStone(new Integer(temp.getId()))) {
+					// Set button icon
+					setIcon(temp, "Black.png");
+				}
 			}
 		});
-		gpanel.add(temp, i, 1);
+		
+		return temp;
+	}
+	
+	private void setIcon(Button target, String path) {
+		double siz = new Double(SettingsContainer.cellSize) * 0.6;
+		Image currentImage = new Image(getClass().getClassLoader().getResourceAsStream(path), siz, siz, true, true);
+		target.setGraphic(new ImageView(currentImage));
 	}
 }

@@ -13,7 +13,7 @@ public class SubClass
 
 	public SubClass(Stage stage)
 	{
-		Scene scene=new Scene(root,300,300);
+		Scene scene = new Scene(root,300,300);
 		stage.setScene(scene);
 		stage.show();
 	}

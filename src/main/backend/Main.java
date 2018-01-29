@@ -18,15 +18,6 @@ class Main {
 		// Создаю объект игры
 		//GoGame game = new GoGame(settings);
 		
-		// Старт окна с игрой, передача параметров
-		/*
-		MainWindowController mw = new MainWindowController();
-		Group root = new Group();
-		Scene scene = new Scene(root,300,300);
-		stage.setScene(scene);
-		stage.show();
-		mw.showWindow(args);
-		*/
 		System.out.println("PROGRAM FINISHED");
 	}
 }
