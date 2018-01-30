@@ -16,12 +16,6 @@ public class MainWindow {
 		
 		javafx.scene.Node fxWindow = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 		
-		
-		
-		System.out.println("Gаme field height, width = ");
-		System.out.println(GoGame.grid.grid.size());
-		System.out.println(GoGame.grid.grid.get(0).size());
-		
 		Stage stage = new Stage();
 		stage.setTitle("GO");
 		Group root = new Group();

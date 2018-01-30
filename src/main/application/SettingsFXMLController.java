@@ -27,14 +27,14 @@ public class SettingsFXMLController implements Initializable {
 	
 	@FXML private Button fx_button_ok, fx_button_cancel, fx_button_reset;
 	
-	@FXML private TextField FX_SIZE_X, FX_SIZE_Y, FX_SIZE_CELL;
+	@FXML private TextField FX_SIZE_X, FX_SIZE_Y, FX_SIZE_CELL, FX_N_STONES;
 	
 	// +====================[PRIVATE FUNCTIONS]====================+
 	
 	private void reset() { // Here put into text area default text.
-		FX_SIZE_X.setText("12");
-		FX_SIZE_Y.setText("12");
-		FX_SIZE_CELL.setText("50");
+		FX_SIZE_X.setText("18");
+		FX_SIZE_Y.setText("18");
+		FX_SIZE_CELL.setText("40");
 	}
 	
 	private void initLables() {
@@ -50,13 +50,15 @@ public class SettingsFXMLController implements Initializable {
 			SettingsContainer.width = Integer.parseInt(FX_SIZE_X.getText());
 			SettingsContainer.height = Integer.parseInt(FX_SIZE_Y.getText());
 			SettingsContainer.cellSize = Integer.parseInt(FX_SIZE_CELL.getText());
+			SettingsContainer.nStones = Integer.parseInt(FX_N_STONES.getText());
 		}
 		catch (Exception e) { somethingWrong = true; }
 		if (
 			somethingWrong ||
 			SettingsContainer.width < 1 || SettingsContainer.width > 100 ||
 			SettingsContainer.height < 1 || SettingsContainer.height > 100 ||
-			SettingsContainer.cellSize < 1 || SettingsContainer.width > 1000
+			SettingsContainer.cellSize < 1 || SettingsContainer.width > 1000 ||
+			SettingsContainer.nStones < 1
 		) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);

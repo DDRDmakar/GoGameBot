@@ -2,6 +2,9 @@ package backend.field;
 
 public class GoNode {
 	
+	// 0 - empty
+	// 1 - occupied by you
+	// 2 - occupied by other player
 	private int value = 0;
 	private int ID;
 	private GoNode left, right, top, bottom;
@@ -27,9 +30,27 @@ public class GoNode {
 	}
 	
 	public GoNode(GoNode left, GoNode right, GoNode top, GoNode Bottom) {
+		value = 0;
 		this.left = left;
 		this.right = right;
 		this.top = top;
 		this.bottom = bottom;
+	}
+	
+	public int hashCode() {
+		return (new Integer(ID).hashCode() * 23) + (new Integer(value).hashCode());
+	}
+	
+	public String toString() {
+		return "Node " + ID;
+	}
+	
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj instanceof GoNode) {
+			GoNode n = (GoNode)obj;
+			if (n.getID() == this.ID) return true;
+		}
+		return false;
 	}
 }
