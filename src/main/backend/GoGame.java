@@ -181,7 +181,8 @@ public class GoGame {
 			
 			// If player placed stone into killzone
 			if (weakGroupAvailableCells.size() == 0) {
-				return null;
+				chosen = null;
+				continue;
 			}
 			
 			Random rand = new Random();
