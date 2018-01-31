@@ -160,61 +160,68 @@ public class GoGame {
 		
 		// Find cell to fill
 		
-		GoNode chosen;
+		GoNode chosen = null;
 		
 		double d = new Random().nextDouble(); // random value in range 0.0 - 1.0
 		
 		// Find cell to surround user's structure
-		HashSet<GoNode> weakGroup = groups.get(0);
-		ArrayList<GoNode> weakGroupAvailableCells = new ArrayList<GoNode>();
 		
-		// n is node
-		weakGroup.forEach((n) -> {
-			if (n.getLeft()   != null && n.getLeft().getValue()   == 0) weakGroupAvailableCells.add(n.getLeft());
-			if (n.getRight()  != null && n.getRight().getValue()  == 0) weakGroupAvailableCells.add(n.getRight());
-			if (n.getTop()    != null && n.getTop().getValue()    == 0) weakGroupAvailableCells.add(n.getTop());
-			if (n.getBottom() != null && n.getBottom().getValue() == 0) weakGroupAvailableCells.add(n.getBottom());
-		});
 		
-		// If player placed stone into killzone
-		if (weakGroupAvailableCells.size() == 0) {
-			return null;
-		}
-		
-		Random rand = new Random();
-		int randomIndex = rand.nextInt(weakGroupAvailableCells.size());
-		
-		int goodIndex = randomIndex;
-		chosen = weakGroupAvailableCells.get(goodIndex);
-		
-		int surroundRatio = 4;
-		int indexOfThree = -1; // Index of free cell, surrounded by 3 enemies
-		// Choose cell, not surrounded by 3 or 4 user's stones
-		for (int counter = randomIndex; counter < randomIndex + weakGroupAvailableCells.size(); ++counter) {
-			goodIndex = counter % weakGroupAvailableCells.size();
-			GoNode currentNode = weakGroupAvailableCells.get(goodIndex);
-			surroundRatio = 0;
-			if (currentNode.getLeft() == null   || currentNode.getLeft().getValue()   == 1) ++surroundRatio;
-			if (currentNode.getRight() == null  || currentNode.getRight().getValue()  == 1) ++surroundRatio;
-			if (currentNode.getTop() == null    || currentNode.getTop().getValue()    == 1) ++surroundRatio;
-			if (currentNode.getBottom() == null || currentNode.getBottom().getValue() == 1) ++surroundRatio;
+		for (int groupPosition = 0; groupPosition < groups.size(); ++groupPosition) {
+			HashSet<GoNode> weakGroup = groups.get(groupPosition);
+			ArrayList<GoNode> weakGroupAvailableCells = new ArrayList<GoNode>();
 			
-			if (surroundRatio < 3) break;
-			if (surroundRatio == 3) indexOfThree = goodIndex;
-		}
-		
-		if (surroundRatio == 4) {
-			if (indexOfThree == -1) {
-				return null; // Pass
+			// n is node
+			weakGroup.forEach((n) -> {
+				if (n.getLeft()   != null && n.getLeft().getValue()   == 0) weakGroupAvailableCells.add(n.getLeft());
+				if (n.getRight()  != null && n.getRight().getValue()  == 0) weakGroupAvailableCells.add(n.getRight());
+				if (n.getTop()    != null && n.getTop().getValue()    == 0) weakGroupAvailableCells.add(n.getTop());
+				if (n.getBottom() != null && n.getBottom().getValue() == 0) weakGroupAvailableCells.add(n.getBottom());
+			});
+			
+			// If player placed stone into killzone
+			if (weakGroupAvailableCells.size() == 0) {
+				return null;
 			}
-			else {
-				chosen = weakGroupAvailableCells.get(indexOfThree); // Bad choice
+			
+			Random rand = new Random();
+			int randomIndex = rand.nextInt(weakGroupAvailableCells.size());
+			
+			int goodIndex = randomIndex;
+			chosen = weakGroupAvailableCells.get(goodIndex);
+			
+			int surroundRatio = 4;
+			int indexOfThree = -1; // Index of free cell, surrounded by 3 enemies
+			// Choose cell, not surrounded by 3 or 4 user's stones
+			for (int counter = randomIndex; counter < randomIndex + weakGroupAvailableCells.size(); ++counter) {
+				goodIndex = counter % weakGroupAvailableCells.size();
+				GoNode currentNode = weakGroupAvailableCells.get(goodIndex);
+				surroundRatio = 0;
+				if (currentNode.getLeft() == null   || currentNode.getLeft().getValue()   == 1) ++surroundRatio;
+				if (currentNode.getRight() == null  || currentNode.getRight().getValue()  == 1) ++surroundRatio;
+				if (currentNode.getTop() == null    || currentNode.getTop().getValue()    == 1) ++surroundRatio;
+				if (currentNode.getBottom() == null || currentNode.getBottom().getValue() == 1) ++surroundRatio;
+				
+				if (surroundRatio < 3) break;
+				if (surroundRatio == 3) indexOfThree = goodIndex;
 			}
-		}
-		else chosen = weakGroupAvailableCells.get(goodIndex); // Good choice
+			
+			if (surroundRatio == 4) {
+				if (indexOfThree == -1) {
+					chosen = null; // Pass
+				}
+				else {
+					chosen = weakGroupAvailableCells.get(indexOfThree); // Bad choice
+				}
+			}
+			else chosen = weakGroupAvailableCells.get(goodIndex); // Good choice
+			
+			if (chosen != null) break;
+			
+		} // end for
 		
 		// Set computer's step;
-		chosen.setValue(2);
+		if (chosen != null) chosen.setValue(2);
 		
 		return chosen;
 	}
