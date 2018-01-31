@@ -8,15 +8,13 @@
 
 <AnchorPane prefHeight="287.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SettingsFXMLController">
    <children>
-      <TextField fx:id="FX_SIZE_X" layoutX="38.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="18" />
+      <TextField fx:id="FX_SIZE_X" layoutX="45.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="18" />
       <Label layoutX="47.0" layoutY="28.0" text="Field size:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="47.0" layoutY="63.0" text="X" />
-      <Label layoutX="118.0" layoutY="63.0" text="Y" />
-      <TextField fx:id="FX_SIZE_Y" layoutX="111.0" layoutY="91.0" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #DCDCDC;" text="18" />
+      <Label layoutX="47.0" layoutY="63.0" text="X and Y" />
       <Label layoutX="189.0" layoutY="28.0" text="Cell size:">
          <font>
             <Font size="19.0" />

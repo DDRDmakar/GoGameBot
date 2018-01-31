@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane minHeight="400.0" minWidth="400.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainWindowFXMLController">
    <children>
@@ -22,5 +22,6 @@
       <Label fx:id="compUsed" layoutX="238.0" layoutY="347.0" text="0" textFill="WHITE" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="232.0" />
       <Label fx:id="compTaken" layoutX="238.0" layoutY="362.0" text="0" textFill="WHITE" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="232.0" />
       <Label layoutX="29.0" layoutY="347.0" text="Компьютер:" textFill="WHITE" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="29.0" />
+      <Button fx:id="passButton" onAction="#pass" layoutX="269.0" layoutY="349.0" mnemonicParsing="false" text="Пропустить ход" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="10.0" />
    </children>
 </AnchorPane>

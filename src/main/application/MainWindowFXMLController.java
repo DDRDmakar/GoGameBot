@@ -43,10 +43,12 @@ public class MainWindowFXMLController implements Initializable {
 	GridPane gpanel;
 	
 	// Background pane of game
-	@FXML AnchorPane mainPane;
+	@FXML private AnchorPane mainPane;
 	
 	// Labels
-	@FXML Label compTaken, compUsed, userTaken, userUsed;
+	@FXML private Label compTaken, compUsed, userTaken, userUsed;
+	
+	@FXML private Button passButton;
 	
 	// +====================[PRIVATE FUNCTIONS]====================+
 	
@@ -144,8 +146,8 @@ public class MainWindowFXMLController implements Initializable {
 					// Set button icon
 					setIcon(temp, "Black.png");
 					
-					GoGame.removeClosedGroups(2);
 					GoGame.removeClosedGroups(1);
+					GoGame.removeClosedGroups(2);
 					
 					// Computer sets white stones
 					// Exception, if user passes first step
@@ -156,15 +158,14 @@ public class MainWindowFXMLController implements Initializable {
 							Button computerGuiCell = GoGame.buttonIDs.get(currentComputerStep.getID());
 							setIcon(computerGuiCell, "White.png");
 						}
+						else { System.out.println("Computer passes."); }
 					}
 					catch(IllegalStateException ex) { }
 					
-					GoGame.removeClosedGroups(1);
 					GoGame.removeClosedGroups(2);
+					GoGame.removeClosedGroups(1);
 					
 					redraw();
-					// Show graph
-					// System.out.println(GoGame.show());
 					
 					updateLabels();
 					
@@ -252,5 +253,38 @@ public class MainWindowFXMLController implements Initializable {
 		}
 		
 		return true;
+	}
+	
+	/**
+	* User passes step
+	* (no arguments)
+	*/
+	
+	@FXML void pass() {
+		try {
+			GoNode currentComputerStep = GoGame.computerGo();
+			if (currentComputerStep != null) {
+				SettingsContainer.computerUsedStones++;
+				Button computerGuiCell = GoGame.buttonIDs.get(currentComputerStep.getID());
+				setIcon(computerGuiCell, "White.png");
+			}
+			else { System.out.println("Computer passes."); }
+		}
+		catch(IllegalStateException ex) { }
+		
+		GoGame.removeClosedGroups(2);
+		GoGame.removeClosedGroups(1);
+		
+		redraw();
+		
+		updateLabels();
+		
+		if (gameEnd()) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+			alert.setTitle("Игра окончена.");
+			alert.setHeaderText("Игра окончена.");
+			alert.showAndWait();
+		}
 	}
 }

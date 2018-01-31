@@ -31,7 +31,7 @@ public class SettingsFXMLController implements Initializable {
 	
 	@FXML private Button fx_button_ok, fx_button_cancel, fx_button_reset;
 	
-	@FXML private TextField FX_SIZE_X, FX_SIZE_Y, FX_SIZE_CELL, FX_N_STONES;
+	@FXML private TextField FX_SIZE_X, FX_SIZE_CELL, FX_N_STONES;
 	
 	// +====================[PRIVATE FUNCTIONS]====================+
 	
@@ -44,7 +44,6 @@ public class SettingsFXMLController implements Initializable {
 	
 	private void reset() { // Here put into text area default text.
 		FX_SIZE_X.setText("18");
-		FX_SIZE_Y.setText("18");
 		FX_SIZE_CELL.setText("40");
 		FX_N_STONES.setText("180");
 	}
@@ -61,8 +60,8 @@ public class SettingsFXMLController implements Initializable {
 		boolean somethingWrong = false;
 		
 		try {
+			SettingsContainer.height = Integer.parseInt(FX_SIZE_X.getText());
 			SettingsContainer.width = Integer.parseInt(FX_SIZE_X.getText());
-			SettingsContainer.height = Integer.parseInt(FX_SIZE_Y.getText());
 			SettingsContainer.cellSize = Integer.parseInt(FX_SIZE_CELL.getText());
 			SettingsContainer.nStones = Integer.parseInt(FX_N_STONES.getText());
 		}

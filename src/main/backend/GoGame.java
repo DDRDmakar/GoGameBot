@@ -187,20 +187,31 @@ public class GoGame {
 		int goodIndex = randomIndex;
 		chosen = weakGroupAvailableCells.get(goodIndex);
 		
+		int surroundRatio = 4;
+		int indexOfThree = -1; // Index of free cell, surrounded by 3 enemies
 		// Choose cell, not surrounded by 3 or 4 user's stones
 		for (int counter = randomIndex; counter < randomIndex + weakGroupAvailableCells.size(); ++counter) {
 			goodIndex = counter % weakGroupAvailableCells.size();
 			GoNode currentNode = weakGroupAvailableCells.get(goodIndex);
-			int surroundRatio = 0;
+			surroundRatio = 0;
 			if (currentNode.getLeft() == null   || currentNode.getLeft().getValue()   == 1) ++surroundRatio;
 			if (currentNode.getRight() == null  || currentNode.getRight().getValue()  == 1) ++surroundRatio;
 			if (currentNode.getTop() == null    || currentNode.getTop().getValue()    == 1) ++surroundRatio;
 			if (currentNode.getBottom() == null || currentNode.getBottom().getValue() == 1) ++surroundRatio;
 			
 			if (surroundRatio < 3) break;
+			if (surroundRatio == 3) indexOfThree = goodIndex;
 		}
-		chosen = weakGroupAvailableCells.get(goodIndex);
 		
+		if (surroundRatio == 4) {
+			if (indexOfThree == -1) {
+				return null; // Pass
+			}
+			else {
+				chosen = weakGroupAvailableCells.get(indexOfThree); // Bad choice
+			}
+		}
+		else chosen = weakGroupAvailableCells.get(goodIndex); // Good choice
 		
 		// Set computer's step;
 		chosen.setValue(2);
