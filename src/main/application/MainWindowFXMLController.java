@@ -145,6 +145,7 @@ public class MainWindowFXMLController implements Initializable {
 					setIcon(temp, "Black.png");
 					
 					GoGame.removeClosedGroups(2);
+					GoGame.removeClosedGroups(1);
 					
 					// Computer sets white stones
 					// Exception, if user passes first step
@@ -159,6 +160,7 @@ public class MainWindowFXMLController implements Initializable {
 					catch(IllegalStateException ex) { }
 					
 					GoGame.removeClosedGroups(1);
+					GoGame.removeClosedGroups(2);
 					
 					redraw();
 					// Show graph
