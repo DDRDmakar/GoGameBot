@@ -37,7 +37,7 @@ public class GoNode {
 		this(null, null, null, null);
 	}
 	
-	public GoNode(GoNode left, GoNode right, GoNode top, GoNode Bottom) {
+	public GoNode(GoNode left, GoNode right, GoNode top, GoNode bottom) {
 		value = 0;
 		this.left = left;
 		this.right = right;
