@@ -10,6 +10,11 @@ import java.lang.IllegalStateException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+* Class, which manages all game processes (backend).
+* Contains realization of operations and searching on the game graph.
+*/
+
 public class GoGame {
 
 // +====================[VARIABLES]====================+
@@ -24,6 +29,17 @@ public class GoGame {
 	static boolean removeIsClosed;
 	
 // +====================[PRIVATE FUNCTIONS]====================+
+	
+	/**
+	* Finds all groups of cells, occupied by given user.
+	* Group of cells should be connected with each other vertically or horizontally.
+	* Uses wide search to find all nodes connected to some node.
+	* @param value - value of GoNode to search for.
+	*     0 - empty cell
+	*     1 - user
+	*     2 - computer
+	* @return list of sets of nodes. List of groups. Each set contains nodes from each group.
+	*/
 	
 	// Get list of groups
 	private static ArrayList<HashSet<GoNode>> getGroupsList(int value) {
@@ -93,6 +109,14 @@ public class GoGame {
 	
 // +====================[PUBLIC FUNCTIONS]====================+
 	
+	/**
+	* Manage user's step.
+	* Set cell black, if it's free.
+	* @param ID - ID of cell to set it black
+	* @return true if cell is clear
+	* @return false if cell is already used
+	*/
+	
 	public static boolean playerSetStone(int ID) {
 		GoNode currentNode = grid.grid.get(ID / SettingsContainer.height).get(ID % SettingsContainer.height);
 		if (currentNode.getValue() == 0) {
@@ -104,6 +128,14 @@ public class GoGame {
 			return false;
 		}
 	}
+	
+	/**
+	* Function, which chooses, what cell would be better for computer to occupy.
+	* No parameters.
+	* Get list of all groups, select the weakest group of all and try to kill it.
+	* @throws IllegalStateException and sets random cell white, if field is clear.
+	* @return link to node, which computer occupied.
+	*/
 	
 	// Signal for computer to make a step
 	public static GoNode computerGo() {
@@ -127,8 +159,6 @@ public class GoGame {
 		groups.sort(Comparator.comparing(HashSet::size));
 		
 		// Find cell to fill
-		// 80% - surrounding user's cell groups
-		// 20% - building own groups
 		
 		GoNode chosen;
 		
@@ -178,6 +208,11 @@ public class GoGame {
 		return chosen;
 	}
 	
+	/**
+	* Debug function.
+	* Draw game array in console
+	*/
+	
 	public static String show() {
 		String result = new String();
 		for (int i = 0; i < SettingsContainer.height; ++i) {
@@ -189,6 +224,14 @@ public class GoGame {
 		}
 		return result;
 	}
+	
+	/**
+	* Delete groups, which are killed by other player.
+	* (groups, which don't have access to free cells)
+	* @param value - GoNode value to search for.
+	* @return true, if any group was killed,
+	* @return false, if not.
+	*/
 	
 	public static boolean removeClosedGroups(int value) {
 		ArrayList<HashSet<GoNode>> groups = getGroupsList(value);

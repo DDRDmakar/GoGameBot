@@ -1,5 +1,13 @@
 package backend.field;
 
+/**
+* Game field graph vertex class.
+* Contains:
+*     ID - node unique identifier
+*     value - state of cell
+*     and four ninks to four node neighbors on the graph
+*/
+
 public class GoNode {
 	
 	// 0 - empty

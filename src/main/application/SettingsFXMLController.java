@@ -20,6 +20,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+* FXML controller of settings window.
+* Works in GUI thread.
+*/
 
 public class SettingsFXMLController implements Initializable {
 
@@ -31,15 +35,25 @@ public class SettingsFXMLController implements Initializable {
 	
 	// +====================[PRIVATE FUNCTIONS]====================+
 	
+	/**
+	* RESET button action
+	* Reset text areas contents to defaults.
+	* (field size by X, by Y, one cell size in pixels and maximum count of used stones)
+	* No parameters
+	*/
+	
 	private void reset() { // Here put into text area default text.
 		FX_SIZE_X.setText("18");
 		FX_SIZE_Y.setText("18");
 		FX_SIZE_CELL.setText("40");
+		FX_N_STONES.setText("180");
 	}
 	
-	private void initLables() {
-		// ...
-	}
+	/**
+	* OK button action.
+	* Check, if game parameters are correct and load them into SettingsContainer class.
+	* @see application.SettingsContainer
+	*/
 	
 	@FXML
 	void startGame(ActionEvent event) {
@@ -73,10 +87,18 @@ public class SettingsFXMLController implements Initializable {
 		}
 	}
 	
+	/**
+	* CANCEL button action
+	* Ends all threads.
+	*/
 	@FXML
 	void leaveGame(ActionEvent event) {
 		System.exit(0);
 	}
+	
+	/**
+	* RESET button event handler
+	*/
 	
 	@FXML
 	void restoreDefaultSettings(ActionEvent event) {
@@ -85,13 +107,14 @@ public class SettingsFXMLController implements Initializable {
 	
 	// +====================[PUBLIC FUNCTIONS]====================+
 	
+	/**
+	* Set default values into text fields.
+	* @param url, @param resourcebundle - Initializable parameters.
+	* (this class implements Initializable)
+	*/
+	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		
-		// ...
-		
-		initLables();
-		
 		reset();
 	}
 }

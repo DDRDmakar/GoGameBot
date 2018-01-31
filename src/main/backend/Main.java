@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 
+/**
+* Main function, shows settings window.
+*/
+
 class Main {
 	
 	public static void main(String[] args) {

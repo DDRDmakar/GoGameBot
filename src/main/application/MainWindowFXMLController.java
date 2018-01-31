@@ -29,19 +29,31 @@ import javafx.scene.paint.*;
 
 import java.lang.IllegalStateException;
 
+/**
+* FXML controller of main game window.
+* Works in GUI thread.
+* Event handlers and graphical functions.
+*/
 
 public class MainWindowFXMLController implements Initializable {
 
 	// +====================[VARIABLES]====================+
 	
+	// Cell field
 	GridPane gpanel;
 	
+	// Background pane of game
 	@FXML AnchorPane mainPane;
 	
 	// Labels
 	@FXML Label compTaken, compUsed, userTaken, userUsed;
 	
 	// +====================[PRIVATE FUNCTIONS]====================+
+	
+	/**
+	* Updates label contents (game score).
+	* No parameters.
+	*/
 	
 	private void updateLabels() {
 		compTaken.setText(String.valueOf(SettingsContainer.computerKilledCells));
@@ -51,6 +63,13 @@ public class MainWindowFXMLController implements Initializable {
 	}
 	
 	// +====================[PUBLIC FUNCTIONS]====================+
+	
+	/**
+	* Adds GridPane onto game window template
+	* and button into each cell of grid.
+	* @param url, @param resourcebundle - Initializable parameters.
+	* (this class implements Initializable)
+	*/
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,9 +101,6 @@ public class MainWindowFXMLController implements Initializable {
 			++i;
 		}
 		
-		//mainPane.getStyleClass().add("pane");
-		//gpanel.getStyleClass().addAll("pane","grid");
-		
 		// gpanel.setGridLinesVisible(true);
 		gpanel.setStyle("-fx-background-color: palegreen; -fx-padding: 10; -fx-hgap: 10; -fx-vgap: 10;");
 		gpanel.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -92,6 +108,16 @@ public class MainWindowFXMLController implements Initializable {
 		
 		updateLabels();
 	}
+	
+	
+	/**
+	* Create one button, add style and
+	* create event handler for button.
+	* Each button associates with element of game array
+	* @see backend.field.GameField
+	* @param id - ID of new button and of game array element.
+	* @return new button object
+	*/
 	
 	private Button createButton(int id) {
 		final Button temp = new Button();
@@ -157,12 +183,29 @@ public class MainWindowFXMLController implements Initializable {
 		return temp;
 	}
 	
+	
+	/**
+	* Set image onto button.
+	* Image size is 1/2 from button size.
+	* @param target - button
+	* @param path   - path to image file.
+	*/
+	
 	private void setIcon(Button target, String path) {
 		double siz = new Double(SettingsContainer.cellSize) * 0.5;
 		Image currentImage = new Image(getClass().getClassLoader().getResourceAsStream(path), siz, siz, true, true);
 		target.setGraphic(null);
 		target.setGraphic(new ImageView(currentImage));
 	}
+	
+	/**
+	* Refreshes contents of all game cells (in GUI).
+	* Black, if cell is occupied by user
+	* White, if cell is occupied by computer
+	* Nothing, if cell is free.
+	* 
+	* No parameters.
+	*/
 	
 	private void redraw() {
 		// Iterate through buttons
@@ -181,6 +224,12 @@ public class MainWindowFXMLController implements Initializable {
 		}
 	}
 	
+	/**
+	* Detect end of game.
+	* @return true if user or computer used all stones
+	* OR if there are no more double-free cells.
+	*/
+	
 	private boolean gameEnd() {
 		if (SettingsContainer.userUsedStones >= SettingsContainer.nStones) return true;
 		if (SettingsContainer.computerUsedStones >= SettingsContainer.nStones) return true;
@@ -190,8 +239,8 @@ public class MainWindowFXMLController implements Initializable {
 				GoNode curNode = GoGame.grid.grid.get(j).get(i);
 				// if curNode is free cell and has at least one free neighbour, return false;
 				if (
-					curNode.getValue() == 0 && (
-						(curNode.getLeft()   != null && curNode.getLeft().getValue()   == 0) ||
+					curNode.getValue() == 0 && ( // If cell is free
+						(curNode.getLeft()   != null && curNode.getLeft().getValue()   == 0) || // And one of neighbors is free
 						(curNode.getRight()  != null && curNode.getRight().getValue()  == 0) ||
 						(curNode.getTop()    != null && curNode.getTop().getValue()    == 0) ||
 						(curNode.getBottom() != null && curNode.getBottom().getValue() == 0)

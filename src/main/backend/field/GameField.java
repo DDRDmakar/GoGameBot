@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import backend.field.GoNode;
 import application.SettingsContainer;
 
+/**
+* Class, which manages game field array.
+* Field is array of arrays of GoNode objects.
+* Each node is connected with 4 neighbors (graph)
+*/
+
 public class GameField {
 // +====================[VARIABLES]====================+
 	
+	// Game field array
 	public ArrayList<ArrayList<GoNode>> grid = new ArrayList<ArrayList<GoNode>>();
-	
-// +====================[PRIVATE FUNCTIONS]====================+
-	
-	
 	
 // +====================[PUBLIC FUNCTIONS]====================+
 	
@@ -29,6 +32,13 @@ public class GameField {
 	// | 0,0           0,*   X
 	// *_______________________
 	//
+	
+	/**
+	* Constructor.
+	* Create empty game field of given size and
+	* make links between neighbors
+	* (to use search algorithms on the graph)
+	*/
 	
 	// CONSTRUCTOR
 	public GameField() {
