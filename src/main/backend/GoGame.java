@@ -33,7 +33,6 @@ public class GoGame {
 	/**
 	* Finds all groups of cells, occupied by given user.
 	* Group of cells should be connected with each other vertically or horizontally.
-	* Uses wide search to find all nodes connected to some node.
 	* @param value - value of GoNode to search for.
 	*     0 - empty cell
 	*     1 - user
