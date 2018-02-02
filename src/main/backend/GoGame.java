@@ -43,11 +43,11 @@ public class GoGame {
 	// Get list of groups
 	private static ArrayList<HashSet<GoNode>> getGroupsList(int value) {
 		// Collection of groups
-		ArrayList<HashSet<GoNode>> storage = new ArrayList<HashSet<GoNode>>();
+		ArrayList<HashSet<GoNode>> storage = new ArrayList<>();
 		// Already used nodes
-		HashSet<GoNode> used = new HashSet<GoNode>();
+		HashSet<GoNode> used = new HashSet<>();
 		
-		HashSet<GoNode> currentGroup = new HashSet<GoNode>();
+		HashSet<GoNode> currentGroup = new HashSet<>();
 		
 		// Check all cells. If its value == value and it was not used before, start searching group from it.
 		for (int i = 0; i < SettingsContainer.height; ++i) {
@@ -57,7 +57,7 @@ public class GoGame {
 					
 					/************************************************************************************/
 					
-					Stack<GoNode> currentChain = new Stack<GoNode>();     // Chain of nodes, which are being checked at the moment
+					Stack<GoNode> currentChain = new Stack<>();     // Chain of nodes, which are being checked at the moment
 					
 					// Add first node to the used list
 					used.add(startNode);
@@ -67,34 +67,40 @@ public class GoGame {
 					// While we have nodes to check
 					while (!currentChain.empty()) {
 						// Take next node to check
-						GoNode currentNode = currentChain.pop();
+						GoNode currentNode = currentChain.peek();
 						
 						currentGroup.add(currentNode);
+						used.add(currentNode);
 						
 						if (currentNode.getLeft() != null && currentNode.getLeft().getValue() == value && !used.contains(currentNode.getLeft())) {
 							currentChain.push(currentNode.getLeft());
+							continue;
 						}
 						
 						if (currentNode.getRight() != null && currentNode.getRight().getValue() == value && !used.contains(currentNode.getRight())) {
 							currentChain.push(currentNode.getRight());
+							continue;
 						}
 						
 						if (currentNode.getTop() != null && currentNode.getTop().getValue() == value && !used.contains(currentNode.getTop())) {
 							currentChain.push(currentNode.getTop());
+							continue;
 						}
 						
 						if (currentNode.getBottom() != null && currentNode.getBottom().getValue() == value && !used.contains(currentNode.getBottom())) {
 							currentChain.push(currentNode.getBottom());
+							continue;
 						}
 						
-						used.add(currentNode);
+						// If no new ways found
+						currentChain.pop();
 						
 					} // end while
 					
 					/************************************************************************************/
 					
 					storage.add(currentGroup);
-					currentGroup = new HashSet<GoNode>();
+					currentGroup = new HashSet<>();
 					
 				} // end if
 				
