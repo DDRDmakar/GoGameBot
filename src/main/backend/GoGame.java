@@ -128,6 +128,25 @@ public class GoGame {
 		}
 	}
 	
+	
+	private static class GroupComparator implements Comparator<HashSet<GoNode>> {
+		@Override
+		public int compare(HashSet<GoNode> item1, HashSet<GoNode> item2) {
+			return countDame(item1) - countDame(item2);
+		}
+		
+		private int countDame(HashSet<GoNode> item) {
+			int result = 0;
+			for (GoNode noda : item) {
+				if (noda.getLeft()   != null && noda.getLeft().getValue()   == 0) ++result;
+				if (noda.getRight()  != null && noda.getRight().getValue()  == 0) ++result;
+				if (noda.getTop()    != null && noda.getTop().getValue()    == 0) ++result;
+				if (noda.getBottom() != null && noda.getBottom().getValue() == 0) ++result;
+			}
+			return result;
+		}
+	}
+	
 	/**
 	* Function, which chooses, what cell would be better for computer to occupy.
 	* No parameters.
@@ -155,7 +174,8 @@ public class GoGame {
 		}
 		
 		// TODO sort by dame count (free cells around)
-		groups.sort(Comparator.comparing(HashSet::size));
+		// groups.sort(Comparator.comparing(HashSet::size));
+		groups.sort(new GroupComparator());
 		
 		// Find cell to fill
 		
